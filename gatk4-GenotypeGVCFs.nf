@@ -44,7 +44,6 @@ if (params.help)
     log.info "--gatk_exec                     BIN PATH                  Full path to GATK4 executable"
     log.info "--dbsnp                         VCF FILE                  dbSNP VCF file"
     log.info "--mills                         VCF FILE                  Mills and 1000G gold standard indels VCF file"
-    log.info "--axiom                         VCF FILE                  Axiom Exome Plus genotypes all populations poly VCF file"
     log.info "--hapmap                        VCF FILE                  hapmap VCF file"
     log.info "--omni                          VCF FILE                  1000G omni VCF file"
     log.info "--onekg                         VCF FILE                  1000G phase1 snps high confidence VCF file"
@@ -61,7 +60,6 @@ params.ref_fasta     = null
 params.gatk_exec     = null
 params.dbsnp         = null
 params.mills         = null
-params.axiom         = null
 params.hapmap        = null
 params.omni          = null
 params.onekg         = null
@@ -81,7 +79,6 @@ GATK                              = params.gatk_exec
 ref                               = file(params.ref_fasta)
 dbsnp_resource_vcf                = file(params.dbsnp)
 mills_resource_vcf                = file(params.mills)
-axiomPoly_resource_vcf            = file(params.axiom)
 hapmap_resource_vcf               = file(params.hapmap)
 omni_resource_vcf                 = file(params.omni)
 one_thousand_genomes_resource_vcf = file(params.onekg)
@@ -286,7 +283,6 @@ process SID_VariantRecalibrator {
       -mode INDEL \
       --max-gaussians 4 \
       -resource mills,known=false,training=true,truth=true,prior=12:${mills_resource_vcf} \
-      -resource axiomPoly,known=false,training=true,truth=false,prior=10:${axiomPoly_resource_vcf} \
       -resource dbsnp,known=true,training=false,truth=false,prior=2:${dbsnp_resource_vcf}
 	
 	"""
