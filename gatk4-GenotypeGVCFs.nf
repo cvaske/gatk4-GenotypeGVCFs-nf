@@ -42,6 +42,7 @@ if (params.help)
     log.info "--cohort                        STRING                    Cohort name"
     log.info "--ref_fasta                     FASTA FILE                Reference FASTA file"
     log.info "--gatk_exec                     BIN PATH                  Full path to GATK4 executable"
+    log.info "--picard_jar                    JAR FILE                  Full path to Picard Tools jar file"
     log.info "--dbsnp                         VCF FILE                  dbSNP VCF file"
     log.info "--mills                         VCF FILE                  Mills and 1000G gold standard indels VCF file"
     log.info "--hapmap                        VCF FILE                  hapmap VCF file"
@@ -58,6 +59,7 @@ params.output_dir    = "."
 params.cohort        = "cohort"
 params.ref_fasta     = null
 params.gatk_exec     = null
+params.picard_jar     = null
 params.dbsnp         = null
 params.mills         = null
 params.hapmap        = null
@@ -76,6 +78,7 @@ gvcf_idx_ch = Channel
 
 			
 GATK                              = params.gatk_exec
+PICARDJAR                         = params.picard_jar
 ref                               = file(params.ref_fasta)
 dbsnp_resource_vcf                = file(params.dbsnp)
 mills_resource_vcf                = file(params.mills)
@@ -154,7 +157,7 @@ process GenotypeGVCFs {
 	"""
     samtools faidx ${genome}
 
-    java -jar \$PICARD_TOOLS_LIBDIR/picard.jar \
+    java -jar ${PICARDJAR} \
     CreateSequenceDictionary \
     R=${genome} \
     O=${genome.baseName}.dict
