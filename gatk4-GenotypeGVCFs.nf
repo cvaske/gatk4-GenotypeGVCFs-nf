@@ -247,7 +247,30 @@ process GatherVcfs {
 	"""
 	${GATK} --java-options "-Xmx3g -Xms3g" \
       GatherVcfs \
-      ${vcf.findAll{ it=~/chr\d+/ }.collect().sort{ it.name.tokenize('.')[1].substring(3).toInteger() }.plus(vcf.find{ it=~/chrX/ }).plus(vcf.find{ it=~/chrY/ }).collect{ "--INPUT $it " }.join() } \
+        --INPUT cohort.chr1.filtered.vcf \
+        --INPUT cohort.chr2.filtered.vcf \
+        --INPUT cohort.chr3.filtered.vcf \
+        --INPUT cohort.chr4.filtered.vcf \
+        --INPUT cohort.chr5.filtered.vcf \
+        --INPUT cohort.chr6.filtered.vcf \
+        --INPUT cohort.chr7.filtered.vcf \
+        --INPUT cohort.chrX.filtered.vcf \
+        --INPUT cohort.chr8.filtered.vcf \
+        --INPUT cohort.chr9.filtered.vcf \
+        --INPUT cohort.chr10.filtered.vcf \
+        --INPUT cohort.chr11.filtered.vcf \
+        --INPUT cohort.chr12.filtered.vcf \
+        --INPUT cohort.chr13.filtered.vcf \
+        --INPUT cohort.chr14.filtered.vcf \
+        --INPUT cohort.chr15.filtered.vcf \
+        --INPUT cohort.chr16.filtered.vcf \
+        --INPUT cohort.chr17.filtered.vcf \
+        --INPUT cohort.chr18.filtered.vcf \
+        --INPUT cohort.chr20.filtered.vcf \
+        --INPUT cohort.chrY.filtered.vcf \
+        --INPUT cohort.chr19.filtered.vcf \
+        --INPUT cohort.chr22.filtered.vcf \
+        --INPUT cohort.chr21.filtered.vcf \
       --OUTPUT ${params.cohort}.vcf
 
 	"""
