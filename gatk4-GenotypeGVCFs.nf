@@ -310,8 +310,8 @@ process SID_VariantRecalibrator {
       -an QD -an DP -an FS -an SOR -an ReadPosRankSum -an MQRankSum -an InbreedingCoeff \
       -mode INDEL \
       --max-gaussians 4 \
-      -resource mills,known=false,training=true,truth=true,prior=12:${mills_resource_vcf} \
-      -resource dbsnp,known=true,training=false,truth=false,prior=2:${dbsnp_resource_vcf}
+      --resource:mills,known=false,training=true,truth=true,prior=12 ${mills_resource_vcf} \
+      -resource:dbsnp,known=true,training=false,truth=false,prior=2 ${dbsnp_resource_vcf}
 	
 	"""
 }	
@@ -350,10 +350,10 @@ process SNV_VariantRecalibrator {
       -an QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR -an DP -an InbreedingCoeff \
       -mode SNP \
       --max-gaussians 6 \
-      -resource hapmap,known=false,training=true,truth=true,prior=15:${hapmap_resource_vcf} \
-      -resource omni,known=false,training=true,truth=true,prior=12:${omni_resource_vcf} \
-      -resource 1000G,known=false,training=true,truth=false,prior=10:${one_thousand_genomes_resource_vcf} \
-      -resource dbsnp,known=true,training=false,truth=false,prior=7:${dbsnp_resource_vcf}
+      --resource:hapmap,known=false,training=true,truth=true,prior=15 ${hapmap_resource_vcf} \
+      --resource:omni,known=false,training=true,truth=true,prior=12 ${omni_resource_vcf} \
+      --resource:1000G,known=false,training=true,truth=false,prior=10 ${one_thousand_genomes_resource_vcf} \
+      --resource:dbsnp,known=true,training=false,truth=false,prior=7 ${dbsnp_resource_vcf}
 	
 	"""
 }	
