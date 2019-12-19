@@ -307,7 +307,7 @@ process SID_VariantRecalibrator {
       --output ${params.cohort}.sid.recal \
       --tranches-file ${params.cohort}.sid.tranches \
       --trust-all-polymorphic \
-      -an QD -an DP -an FS -an SOR -an ReadPosRankSum -an MQRankSum -an InbreedingCoeff \
+      -an QD -an DP -an FS -an SOR -an ReadPosRankSum -an MQRankSum \
       -mode INDEL \
       --max-gaussians 4 \
       --resource:mills,known=false,training=true,truth=true,prior=12 ${mills_resource_vcf} \
@@ -347,7 +347,7 @@ process SNV_VariantRecalibrator {
       --output ${params.cohort}.snv.recal \
       --tranches-file ${params.cohort}.snv.tranches \
       --trust-all-polymorphic \
-      -an QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR -an DP -an InbreedingCoeff \
+      -an QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR -an DP \
       -mode SNP \
       --max-gaussians 6 \
       --resource:hapmap,known=false,training=true,truth=true,prior=15 ${hapmap_resource_vcf} \
@@ -407,9 +407,3 @@ process ApplyRecalibration {
 		
 	"""
 }	
-
-
-
-
-
-
